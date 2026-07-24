@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noticias — La Guaira que Viene</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--azul:#0A2540;--azul2:#1A3A5C;--verde:#00A86B;--verde2:#007A4D;--gris:#F4F6F9;--gris2:#E8ECF0;--gris3:#8A9BB0;--blanco:#FFFFFF;--texto:#1A2332}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;color:var(--texto);background:var(--gris);line-height:1.6}
+
+/* NAV */
+nav{background:rgba(10,37,64,.97);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:60px;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:.5rem;text-decoration:none}
+.logo-icon{width:32px;height:32px;background:var(--verde);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.logo-text{color:#fff;font-weight:700;font-size:.9rem;line-height:1.1}
+.logo-text span{display:block;font-weight:300;font-size:.6rem;color:#8A9BB0;letter-spacing:.08em;text-transform:uppercase}
+.btn-volver{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);padding:.4rem .9rem;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-volver:hover{border-color:#fff}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--azul),var(--azul2));padding:2.5rem 1.5rem;text-align:center}
+.eyebrow{font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--verde);margin-bottom:.6rem}
+h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;color:#fff;margin-bottom:.5rem;line-height:1.2}
+.hero-desc{font-size:.85rem;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto}
+
+/* BANNER */
+.banner{margin:1.5rem;background:#fff;border:2px dashed var(--gris2);border-radius:12px;padding:1.5rem;text-align:center}
+.banner-tipo{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--verde);margin-bottom:.3rem}
+.banner-titulo{font-size:1rem;font-weight:700;color:var(--azul);margin-bottom:.2rem}
+.banner-desc{font-size:.75rem;color:var(--gris3)}
+.banner-espacio{margin-top:.8rem;background:var(--gris);border:1.5px dashed var(--gris2);border-radius:8px;padding:1.2rem;font-size:.7rem;color:var(--gris3)}
+
+/* CONTENIDO */
+.contenido{max-width:900px;margin:0 auto;padding:1.5rem}
+
+/* NOTICIA DESTACADA */
+.noticia-destacada{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);margin-bottom:1.5rem}
+.noticia-img{background:linear-gradient(135deg,var(--azul),var(--azul2));height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem}
+.noticia-body{padding:1.2rem}
+.noticia-tag{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--verde);margin-bottom:.4rem}
+.noticia-titulo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--azul);margin-bottom:.5rem;line-height:1.3}
+.noticia-desc{font-size:.8rem;color:#555;line-height:1.6;margin-bottom:.8rem}
+.noticia-meta{font-size:.68rem;color:var(--gris3);margin-bottom:.8rem}
+.btn-leer{display:inline-block;background:var(--azul);color:#fff;padding:.5rem 1.2rem;border-radius:6px;font-size:.75rem;font-weight:600;text-decoration:none;transition:background .2s}
+.btn-leer:hover{background:var(--azul2)}
+
+/* GRID NOTICIAS */
+.noticias-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-bottom:1.5rem}
+@media(min-width:600px){.noticias-grid{grid-template-columns:repeat(2,1fr)}}
+.noticia-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;cursor:pointer}
+.noticia-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1)}
+.card-img{height:100px;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.card-body{padding:.9rem}
+.card-tag{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--verde);margin-bottom:.3rem}
+.card-titulo{font-weight:700;font-size:.85rem;color:var(--azul);margin-bottom:.3rem;line-height:1.3}
+.card-desc{font-size:.73rem;color:#666;line-height:1.5;margin-bottom:.5rem}
+.card-meta{font-size:.63rem;color:var(--gris3)}
+
+/* PUBLICAR NOTICIA */
+.publicar-box{background:#fff;border-radius:14px;padding:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:1.5rem}
+.publicar-titulo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--azul);margin-bottom:.4rem}
+.publicar-desc{font-size:.78rem;color:var(--gris3);margin-bottom:1rem;line-height:1.5}
+.campo{width:100%;background:var(--gris);border:1.5px solid var(--gris2);border-radius:8px;padding:.7rem .9rem;font-size:.82rem;font-family:'Inter',sans-serif;color:var(--texto);outline:none;transition:border-color .2s;margin-bottom:.7rem}
+.campo:focus{border-color:var(--verde)}
+textarea.campo{resize:vertical;min-height:120px;line-height:1.6}
+.btn-enviar{background:var(--verde);color:#fff;border:none;padding:.75rem 1.5rem;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;width:100%;transition:background .2s}
+.btn-enviar:hover{background:var(--verde2)}
+
+/* BANNER LATERAL */
+.banner-lateral{background:#fff;border:2px dashed var(--gris2);border-radius:12px;padding:1.2rem;text-align:center;margin-bottom:1rem}
+.bl-tipo{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--verde);margin-bottom:.3rem}
+.bl-titulo{font-size:.85rem;font-weight:700;color:var(--azul);margin-bottom:.2rem}
+.bl-desc{font-size:.7rem;color:var(--gris3)}
+.bl-espacio{margin-top:.6rem;background:var(--gris);border:1px dashed var(--gris2);border-radius:6px;padding:.8rem;font-size:.65rem;color:var(--gris3)}
+
+footer{background:var(--azul);color:rgba(255,255,255,.5);text-align:center;padding:1.5rem;font-size:.72rem;line-height:1.8;margin-top:1rem}
+footer a{color:var(--verde);text-decoration:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-icon">🌊</div>
+    <div class="logo-text">La Guaira que Viene<span>Propuestas para Renacer</span></div>
+  </a>
+  <a href="index.html" class="btn-volver">← Volver</a>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Actualidad</div>
+  <h1>Noticias</h1>
+  <p class="hero-desc">Información actualizada sobre la reconstrucción y el desarrollo del litoral central venezolano.</p>
+</div>
+
+<!-- BANNER SUPERIOR -->
+<div class="banner">
+  <div class="banner-tipo">Banner Superior · Publicidad</div>
+  <div class="banner-titulo">Tu empresa aquí</div>
+  <div class="banner-desc">Espacio publicitario de alto impacto · Sección Noticias</div>
+  <div class="banner-espacio">📐 Dimensiones: 970 × 90 px · Banner horizontal · <a href="mailto:propuestaspararenacer@gmail.com?subject=Publicidad Noticias" style="color:var(--verde)">Reservar espacio →</a></div>
+</div>
+
+<div class="contenido">
+
+  <!-- NOTICIA DESTACADA -->
+  <div class="noticia-destacada">
+    <div class="noticia-img">📰</div>
+    <div class="noticia-body">
+      <div class="noticia-tag">Destacado</div>
+      <div class="noticia-titulo">La Guaira que Viene: una plataforma ciudadana para reconstruir el litoral</div>
+      <p class="noticia-desc">Una iniciativa ciudadana independiente nace para documentar, proponer e impulsar la reconstrucción sostenible del litoral central venezolano tras el terremoto del 24 de junio de 2026.</p>
+      <div class="noticia-meta">📅 Julio 2026 · La Guaira, Venezuela</div>
+      <a href="#" class="btn-leer">Leer más →</a>
+    </div>
+  </div>
+
+  <!-- GRID DE NOTICIAS -->
+  <div class="noticias-grid">
+    <div class="noticia-card">
+      <div class="card-img" style="background:linear-gradient(135deg,#0A2540,#1A3A5C)">🏗️</div>
+      <div class="card-body">
+        <div class="card-tag">Reconstrucción</div>
+        <div class="card-titulo">Primeros planes de vivienda sismo-resistente para el litoral</div>
+        <p class="card-desc">Propuestas iniciales para nuevas viviendas seguras en las 5 zonas afectadas del litoral central.</p>
+        <div class="card-meta">📅 Julio 2026</div>
+      </div>
+    </div>
+    <div class="noticia-card">
+      <div class="card-img" style="background:linear-gradient(135deg,#00A86B,#007A4D)">🌿</div>
+      <div class="card-body">
+        <div class="card-tag">Comunidad</div>
+        <div class="card-titulo">Ciudadanos proponen parque costero en Macuto</div>
+        <p class="card-desc">La comunidad de Macuto lidera una iniciativa para transformar terrenos devastados en espacio verde público.</p>
+        <div class="card-meta">📅 Julio 2026</div>
+      </div>
+    </div>
+    <div class="noticia-card">
+      <div class="card-img" style="background:linear-gradient(135deg,#C9A84C,#B8973A)">🕊️</div>
+      <div class="card-body">
+        <div class="card-tag">Memoria</div>
+        <div class="card-titulo">Propuesta de monumento en La Guaira toma fuerza</div>
+        <p class="card-desc">La idea de un monumento a las raíces suma apoyo entre ciudadanos del litoral y la diáspora venezolana.</p>
+        <div class="card-meta">📅 Julio 2026</div>
+      </div>
+    </div>
+    <div class="noticia-card">
+      <div class="card-img" style="background:linear-gradient(135deg,#2C3E50,#34495E)">🌍</div>
+      <div class="card-body">
+        <div class="card-tag">Inspiración</div>
+        <div class="card-titulo">Christchurch: cómo una ciudad se reconstruyó con sus ciudadanos</div>
+        <p class="card-desc">El ejemplo de Nueva Zelanda muestra que la participación ciudadana es clave para una reconstrucción exitosa.</p>
+        <div class="card-meta">📅 Julio 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNER MEDIO -->
+  <div class="banner-lateral" style="margin-bottom:1.5rem">
+    <div class="bl-tipo">Banner Medio · Publicidad</div>
+    <div class="bl-titulo">Tu empresa aquí</div>
+    <div class="bl-desc">Espacio publicitario disponible · Sección Noticias</div>
+    <div class="bl-espacio">📐 Dimensiones: 728 × 90 px · Banner horizontal medio · <a href="mailto:propuestaspararenacer@gmail.com?subject=Publicidad Noticias Medio" style="color:var(--verde)">Reservar →</a></div>
+  </div>
+
+  <!-- PUBLICAR NOTICIA -->
+  <div class="publicar-box">
+    <div class="publicar-titulo">¿Tienes una noticia o información?</div>
+    <p class="publicar-desc">Si tienes información sobre la reconstrucción, un testimonio o una propuesta, compártela con la comunidad.</p>
+    <input type="text" class="campo" placeholder="Tu nombre completo">
+    <input type="email" class="campo" placeholder="Tu correo electrónico">
+    <input type="text" class="campo" placeholder="Título de la noticia o información">
+    <input type="text" class="campo" placeholder="Zona (Macuto, Caraballeda, Tanaguarena...)">
+    <textarea class="campo" placeholder="Escribe aquí tu noticia, testimonio o propuesta..."></textarea>
+    <button class="btn-enviar" onclick="alert('¡Gracias! Tu información fue enviada. La revisaremos pronto.')">Enviar información →</button>
+  </div>
+
+  <!-- BANNER INFERIOR -->
+  <div class="banner-lateral">
+    <div class="bl-tipo">Banner Inferior · Publicidad</div>
+    <div class="bl-titulo">Tu empresa aquí</div>
+    <div class="bl-desc">Espacio publicitario de cierre · Sección Noticias</div>
+    <div class="bl-espacio">📐 Dimensiones: 970 × 90 px · Banner horizontal inferior · <a href="mailto:propuestaspararenacer@gmail.com?subject=Publicidad Noticias Inferior" style="color:var(--verde)">Reservar →</a></div>
+  </div>
+
+</div>
+
+<footer>
+  <strong style="color:#fff">La Guaira que Viene</strong> · Página ciudadana no gubernamental<br>
+  <a href="mailto:propuestaspararenacer@gmail.com">propuestaspararenacer@gmail.com</a><br>
+  <a href="index.html">← Volver al inicio</a>
+</footer>
+
+</body>
+</html>
